@@ -1,5 +1,6 @@
 package com.example.remed;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
+import android.widget.ImageButton;
 
 public class HomePage extends AppCompatActivity {
 
@@ -28,8 +30,22 @@ public class HomePage extends AppCompatActivity {
                 bottomSheetDialog.setContentView(dialogView);
                 bottomSheetDialog.setTitle("Mahmoud");
                 bottomSheetDialog.show();
+
             }
         });
+
+        ImageButton set = findViewById(R.id.settingButton);
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePage.this, SettingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
     }
 
 }
