@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="SignInEditTextWidth">310dp</dimen>
+    <dimen name="SignInEditTextHeight">45dp</dimen>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--    This provides the shape and sixe of the buttons-->
+<!--    used on the main page, it creates the oval shaped buttons,-->
+<!--    "Start" , "Help", "Exit" and "Okay!" -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:width="2dp" android:color="@color/white"/>
+    <corners android:radius="20dp"/>
+    <padding android:top="15dp" android:bottom="15dp" android:left="80dp" android:right="80dp"/>
+</shape>

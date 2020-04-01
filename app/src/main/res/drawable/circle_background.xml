@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--This resource file is responsible for the when the pop message is present-->
+<!--the top right corner a circle with an "X" appears -->
+<!--which gives the user the option to close the pop up message,-->
+<!--the "Okay!" button does the same task-->
+
+<shape android:shape="oval" xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <stroke android:width="2dp" android:color="@color/white" />
+</shape>
+

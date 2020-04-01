@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "621696003254",
+    "firebase_url": "https://remed-41071.firebaseio.com",
+    "project_id": "remed-41071",
+    "storage_bucket": "remed-41071.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621696003254:android:ac0773a035e0b720e2ca17",
+        "android_client_info": {
+          "package_name": "com.example.remed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "621696003254-4p4t19tua1qir6c5b7pj8b6j1bc1h7n5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.remed",
+            "certificate_hash": "6ce359fea048c94f4384a8558c5733bdb3014495"
+          }
+        },
+        {
+          "client_id": "621696003254-ru7pasihmnfkmeei0euerk4acs7vorum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_SifHoR3FMXNo6S2Dr0twBiDLIu3rOew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "621696003254-ru7pasihmnfkmeei0euerk4acs7vorum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
