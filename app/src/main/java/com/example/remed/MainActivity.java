@@ -15,7 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView welcome_title;
+    //TextView welcome_title;
+    Button start;
     Dialog myDialog;
 
     @Override
@@ -23,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDialog = new Dialog(this);
-        welcome_title = findViewById(R.id.welcome_title);
-        welcome_title.setOnClickListener(new View.OnClickListener() {
+        start = findViewById(R.id.start);
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
