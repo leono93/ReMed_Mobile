@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ReMed</string>
     <string name="title_activity_home_page">ReMed</string>
+    <string-array name="language">
+        <item>english</item>
+        <item>dutch</item>
+        <item>korean</item>
+    </string-array>
 </resources>
