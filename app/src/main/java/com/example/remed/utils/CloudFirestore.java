@@ -18,13 +18,13 @@ public class CloudFirestore {
     private Map<String, String> pillMap;
     private FirebaseUser currentUser;
 
-    public CloudFirestore(Map<String, String> pillMap, FirebaseUser currentUser) {
+    public CloudFirestore(FirebaseUser currentUser) {
         this.pillMap = pillMap;
         this.currentUser = currentUser;
     }
 
 
-    void addPill() {
+    public void addPill(Map<String, String> pillMap) {
         // Access a Cloud Firestore instance from your Activity
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -35,7 +35,11 @@ public class CloudFirestore {
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Log.d("Firestore Adding Pill", "Successful");
+                        if(task.isSuccessful()){
+                            Log.d("Firestore Adding Pill", "Successful");
+                        }else{
+                            Log.d("Firestore Adding Pill", "failure");
+                        }
                     }
                 });
     }
