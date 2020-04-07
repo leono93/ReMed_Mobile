@@ -11,11 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -23,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
     private Context context;
     private Button logout_btn;
     private ImageButton back_btn;
+    private TextView account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +38,18 @@ public class SettingActivity extends AppCompatActivity {
     private void init(){
         logout_btn = findViewById(R.id.logout_btn);
         back_btn = findViewById(R.id.backButton);
+        account = findViewById(R.id.account_textView);
         context = SettingActivity.this;
     }
 
     private void setUpWidgets(){
+        FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(mUser != null) {
+            account.setText(mUser.getEmail());
+        }
+
+
         logout_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
