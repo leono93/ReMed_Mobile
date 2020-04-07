@@ -2,16 +2,27 @@ package com.example.remed;
 
 import android.os.Bundle;
 
+import com.example.remed.models.ReminderModel;
 import com.example.remed.utils.CloudFirestore;
+import com.example.remed.utils.ReminderAdapter;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
@@ -19,8 +30,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class HomePage extends AppCompatActivity {
 
@@ -30,6 +45,9 @@ public class HomePage extends AppCompatActivity {
     private FirebaseAuth authentication;
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
+    private ArrayList<ReminderModel> reminderList;
+    private RecyclerView.Adapter reminderAdapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +55,11 @@ public class HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         setUpFirebaseAuthentication();
 
+        reminderList = new ArrayList<>();
+        reminderAdapter = new ReminderAdapter(reminderList, HomePage.this);
+        recyclerView = findViewById(R.id.list);
+        setUpListView();
+        loadReminders();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +78,9 @@ public class HomePage extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && date_edit_text.getText().toString().equals("") ){
+                        if (medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && date_edit_text.getText().toString().equals("")) {
                             Toast.makeText(HomePage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                        }else {
+                        } else {
                             Map<String, String> pillMap = new HashMap<>();
                             pillMap.put("medicine_name", medicine_edit_text.getText().toString());
                             pillMap.put("dose", dose_edit_text.getText().toString());
@@ -66,6 +89,7 @@ public class HomePage extends AppCompatActivity {
                             cloudFirestore.addPill(pillMap);
                             bottomSheetDialog.hide();
                             Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
+                            loadReminders();
                         }
 
                     }
@@ -73,6 +97,45 @@ public class HomePage extends AppCompatActivity {
             }
         });
     }
+
+    private void loadReminders() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseAuth mAuth;
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        db.collection("users").document(currentUser.getUid()).collection("user_reminders")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                if (document != null) {
+                                    callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("date").toString());
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
+
+    private void callAdapter(String reminderName, String dose, String date) {
+        ReminderModel reminder = new ReminderModel();
+        reminder.reminderName = reminderName;
+        reminder.dose = dose;
+        reminder.date = date;
+        reminderList.add(reminder);
+        reminderAdapter.notifyDataSetChanged();
+    }
+    private void setUpListView() {
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(reminderAdapter);
+    }
+
 
     private void setUpFirebaseAuthentication() {
         authentication = FirebaseAuth.getInstance();
