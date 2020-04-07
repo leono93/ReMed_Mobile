@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class HomePage extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
+                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
                 bottomSheetDialog.setContentView(dialogView);
                 bottomSheetDialog.setTitle("Mahmoud");
@@ -48,16 +49,25 @@ public class HomePage extends AppCompatActivity {
 
                 Button button = bottomSheetDialog.findViewById(R.id.add_pill_button);
                 final EditText medicine_edit_text = bottomSheetDialog.findViewById(R.id.medicine_edit_text);
+                final EditText dose_edit_text = bottomSheetDialog.findViewById(R.id.dose_edit_text);
+                final EditText date_edit_text = bottomSheetDialog.findViewById(R.id.date_edit_text);
 
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(medicine_edit_text.getText() != null){
+                        if(medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && date_edit_text.getText().toString().equals("") ){
+                            Toast.makeText(HomePage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                        }else {
                             Map<String, String> pillMap = new HashMap<>();
                             pillMap.put("medicine_name", medicine_edit_text.getText().toString());
+                            pillMap.put("dose", dose_edit_text.getText().toString());
+                            pillMap.put("date", date_edit_text.getText().toString());
                             CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
                             cloudFirestore.addPill(pillMap);
+                            bottomSheetDialog.hide();
+                            Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
             }

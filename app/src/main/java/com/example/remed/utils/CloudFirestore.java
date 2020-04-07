@@ -15,11 +15,9 @@ import java.util.Map;
 
 public class CloudFirestore {
 
-    private Map<String, String> pillMap;
     private FirebaseUser currentUser;
 
     public CloudFirestore(FirebaseUser currentUser) {
-        this.pillMap = pillMap;
         this.currentUser = currentUser;
     }
 
@@ -35,9 +33,9 @@ public class CloudFirestore {
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Log.d("Firestore Adding Pill", "Successful");
-                        }else{
+                        } else {
                             Log.d("Firestore Adding Pill", "failure");
                         }
                     }

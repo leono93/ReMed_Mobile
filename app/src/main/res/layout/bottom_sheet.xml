@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
-            android:text="Add Medicine"
+            android:text="Add Reminder"
             android:textColor="#000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -77,13 +77,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/timeTv"
+            android:id="@+id/dose_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
             android:layout_below="@id/time_identifier"
             android:background="@null"
             android:fontFamily="serif-monospace"
             android:hint="Dose"
+            android:inputType="number"
             android:textColor="@color/outline"
             android:textColorHint="@color/grey"
             android:textSize="20sp"
@@ -93,7 +94,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/timeTv"
+            android:layout_below="@id/dose_edit_text"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
@@ -102,34 +103,34 @@
             android:id="@+id/day_identifier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/timeTv"
+            android:layout_below="@id/dose_edit_text"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
-            android:text="Day"
+            android:text="Date"
             android:textColor="@color/identifier_grey"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/dayTv"
+        <EditText
+            android:id="@+id/date_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
             android:layout_below="@id/day_identifier"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/dialog_options_bg"
+            android:background="@null"
             android:fontFamily="serif-monospace"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Day"
-            android:textColor="@color/white"
+            android:hint="Date"
+            android:inputType="datetime"
+            android:textColor="@color/outline"
+            android:textColorHint="@color/grey"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"  />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/dayTv"
+            android:layout_below="@id/date_edit_text"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
