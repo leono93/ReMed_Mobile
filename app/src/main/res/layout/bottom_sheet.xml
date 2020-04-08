@@ -63,7 +63,7 @@
             android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/time_identifier"
+            android:id="@+id/dose_identifier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/medicine_edit_text"
@@ -80,7 +80,7 @@
             android:id="@+id/dose_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
-            android:layout_below="@id/time_identifier"
+            android:layout_below="@id/dose_identifier"
             android:background="@null"
             android:fontFamily="serif-monospace"
             android:hint="Dose"
@@ -100,7 +100,7 @@
             android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/day_identifier"
+            android:id="@+id/time_identifier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/dose_edit_text"
@@ -108,34 +108,33 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
-            android:text="Date"
+            android:text="Time"
             android:textColor="@color/identifier_grey"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/date_edit_text"
+
+        <TextView
+            android:id="@+id/time_text_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
-            android:layout_below="@id/day_identifier"
-            android:background="@null"
+            android:layout_below="@id/time_identifier"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dialog_options_bg"
             android:fontFamily="serif-monospace"
-            android:hint="Date"
-            android:inputType="datetime"
-            android:textColor="@color/outline"
-            android:textColorHint="@color/grey"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Time"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold"  />
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/date_edit_text"
+            android:layout_below="@id/time_text_view"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
-
-
 
 
     </RelativeLayout>
