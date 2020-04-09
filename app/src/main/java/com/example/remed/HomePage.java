@@ -68,7 +68,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     private RecyclerView recyclerView;
     private EventRecurrence mEventRecurrence = new EventRecurrence();
     String mRrule, day, time;
-    TextView time_edit_text;
+    TextView time_edit_text, dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +79,10 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminderList = new ArrayList<>();
         reminderAdapter = new ReminderAdapter(reminderList, HomePage.this);
         recyclerView = findViewById(R.id.list);
+
+        dateTextView = findViewById(R.id.dateTextView);
+        dateTextView.setText(getDayOfWeek());
+
         setUpListView();
         loadReminders();
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -157,7 +161,9 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document != null) {
-                                    callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString());
+                                    if(document.get("day").toString().contains(getDayOfWeek())){
+                                        callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString());
+                                    }
                                 }
                             }
                         } else {
