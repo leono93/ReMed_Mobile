@@ -136,6 +136,43 @@
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
 
+        <TextView
+            android:id="@+id/day_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_text_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="serif-monospace"
+            android:text="Day"
+            android:textColor="@color/identifier_grey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/day_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SignInEditTextHeight"
+            android:layout_below="@id/day_identifier"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dialog_options_bg"
+            android:fontFamily="serif-monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Day"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/time_text_view"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
 
     </RelativeLayout>
 

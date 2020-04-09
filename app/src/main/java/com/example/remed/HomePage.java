@@ -42,10 +42,14 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -92,12 +96,20 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 final EditText medicine_edit_text = bottomSheetDialog.findViewById(R.id.medicine_edit_text);
                 final EditText dose_edit_text = bottomSheetDialog.findViewById(R.id.dose_edit_text);
                 final TextView time_edit_text = bottomSheetDialog.findViewById(R.id.time_text_view);
+                final TextView day_text_view = bottomSheetDialog.findViewById(R.id.day_text_view);
 
                 time_edit_text.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         timeDialog(time_edit_text);
                         time_edit_text.setText(time);
+                    }
+                });
+
+                day_text_view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dayDialog();
                     }
                 });
 
@@ -111,6 +123,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                             pillMap.put("medicine_name", medicine_edit_text.getText().toString());
                             pillMap.put("dose", dose_edit_text.getText().toString());
                             pillMap.put("time", time);
+                            pillMap.put("day", day);
                             CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
                             cloudFirestore.addPill(pillMap);
                             bottomSheetDialog.hide();
@@ -124,7 +137,14 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         });
     }
 
+    private String getDayOfWeek(){
+        LocalDate date = LocalDate.now();
+        DayOfWeek dow = date.getDayOfWeek();
+        return dow.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+    }
+
     private void loadReminders() {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -155,6 +175,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminderList.add(reminder);
         reminderAdapter.notifyDataSetChanged();
     }
+
     private void setUpListView() {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -162,7 +183,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         recyclerView.setAdapter(reminderAdapter);
     }
 
-    private void dayDialog(){
+    private void dayDialog() {
         FragmentManager fm = getSupportFragmentManager();
         Bundle bundle = new Bundle();
         Time time = new Time();
@@ -171,7 +192,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         bundle.putString(RecurrencePickerDialogFragment.BUNDLE_TIME_ZONE, time.timezone);
         bundle.putString(RecurrencePickerDialogFragment.BUNDLE_RRULE, mRrule);
         bundle.putBoolean(RecurrencePickerDialogFragment.BUNDLE_HIDE_SWITCH_BUTTON, true);
-
 
 
         RecurrencePickerDialogFragment rpd = new RecurrencePickerDialogFragment();
@@ -211,38 +231,26 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
 
     @Override
     public void onRecurrenceSet(String rrule) {
-
         mRrule = rrule;
-
         if (mRrule != null) {
-
             mEventRecurrence.parse(mRrule);
-
         }
-
         populateRepeats();
     }
 
     private void populateRepeats() {
 
         Resources r = getResources();
-
         String repeatString = "";
 
-        boolean enabled;
-
         if (!TextUtils.isEmpty(mRrule)) {
-
             repeatString = EventRecurrenceFormatter.getRepeatString(this, r, mEventRecurrence, true);
-
         }
 
-
         day = repeatString;
-
     }
 
-    private void timeDialog(TextView textView){
+    private void timeDialog(TextView textView) {
 
         TimePickerBuilder tpb = new TimePickerBuilder()
                 .setFragmentManager(getSupportFragmentManager())
@@ -253,9 +261,9 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
 
     @Override
     public void onDialogTimeSet(int reference, int hourOfDay, int minute) {
-        if(minute == 0){
+        if (minute == 0) {
             time = hourOfDay + ":" + "00";
-        }else {
+        } else {
             time = hourOfDay + ":" + minute;
         }
     }
