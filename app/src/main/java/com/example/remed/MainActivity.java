@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TextView welcome_title;
     Button start;
     Dialog myDialog;
 

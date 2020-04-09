@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="350dp"
     android:layout_height="475dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/purple1"
     android:padding="5dp"
     android:layout_gravity="center">
 
@@ -11,7 +11,7 @@
         android:id="@+id/textclose"
         android:layout_width="30dp"
         android:layout_height="35dp"
-        android:textColor="@color/white"
+        android:textColor="@color/purple4"
         android:text="X"
         android:textStyle="bold"
         android:layout_gravity="end"
@@ -31,7 +31,7 @@
             android:text="ReMed"
             android:textStyle="bold"
             android:textSize="32sp"
-            android:textColor="@color/white"
+            android:textColor="@color/purple4"
             android:layout_gravity="center_horizontal"
             />
 
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content">
 
         <LinearLayout
-            android:background="@color/orange"
+            android:background="@color/purple2"
             android:gravity="center"
             android:orientation="vertical"
             android:layout_width="350dp"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="Welcome to ReMed"
                 android:textSize="24sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/purple4"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_marginRight="50dp"
                 android:text="Here you can manage all your medication and get reminders when it's time to take each dose!"
                 android:textSize="16sp"
-                android:textColor="@color/white" />
+                android:textColor="@color/purple4" />
         </LinearLayout>
 
     </LinearLayout>
@@ -89,7 +89,7 @@
             android:background="@drawable/buttonstyle"
             android:onClick="onClick2"
             android:text="Okay!"
-            android:textColor="@color/white" />
+            android:textColor="@color/purple4" />
     </LinearLayout>
 
 

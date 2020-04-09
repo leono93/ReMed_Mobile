@@ -5,7 +5,8 @@
 <!--    "Start" , "Help", "Exit" and "Okay!" -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke android:width="2dp" android:color="@color/white"/>
+    <stroke android:width="2dp" android:color="@color/purple4"/>
     <corners android:radius="20dp"/>
     <padding android:top="15dp" android:bottom="15dp" android:left="80dp" android:right="80dp"/>
+
 </shape>
