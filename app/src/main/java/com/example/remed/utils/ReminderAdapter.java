@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.remed.R;
 import com.example.remed.models.ReminderModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -21,24 +24,28 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
 
     private ArrayList<ReminderModel> reminders;
     private Context context;
+    private FirebaseUser currentUser;
     private ImageView tourist;
     private int index = 0;
 
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView reminderName, date, dose;
+        ImageView delete;
 
         MyViewHolder(View view) {
             super(view);
             reminderName = view.findViewById(R.id.reminder_name);
             date = view.findViewById(R.id.date);
             dose = view.findViewById(R.id.dose);
+            delete = view.findViewById(R.id.delete);
         }
     }
 
-    public ReminderAdapter(ArrayList<ReminderModel> reminders, Context context) {
+    public ReminderAdapter(ArrayList<ReminderModel> reminders, Context context, FirebaseUser currentUser) {
         this.reminders = reminders;
         this.context = context;
+        this.currentUser = currentUser;
     }
 
     @Override
@@ -51,10 +58,22 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        ReminderModel reminderModel = reminders.get(position);
+        final ReminderModel reminderModel = reminders.get(position);
         holder.reminderName.setText(reminderModel.reminderName);
         holder.dose.setText(reminderModel.dose);
         holder.date.setText(reminderModel.date);
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                FirebaseAuth mAuth;
+                mAuth = FirebaseAuth.getInstance();
+                currentUser = mAuth.getCurrentUser();
+                CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
+                cloudFirestore.delete(reminderModel.id, currentUser);
+            }
+        });
 
     }
 

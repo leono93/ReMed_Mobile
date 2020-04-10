@@ -77,7 +77,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         setUpFirebaseAuthentication();
 
         reminderList = new ArrayList<>();
-        reminderAdapter = new ReminderAdapter(reminderList, HomePage.this);
+        reminderAdapter = new ReminderAdapter(reminderList, HomePage.this, currentUser);
         recyclerView = findViewById(R.id.list);
 
         dateTextView = findViewById(R.id.dateTextView);
@@ -162,7 +162,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document != null) {
                                     if(document.get("day").toString().contains(getDayOfWeek())){
-                                        callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString());
+                                        callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
                                     }
                                 }
                             }
@@ -173,8 +173,9 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 });
     }
 
-    private void callAdapter(String reminderName, String dose, String date) {
+    private void callAdapter(String reminderName, String dose, String date, String id) {
         ReminderModel reminder = new ReminderModel();
+        reminder.id = id;
         reminder.reminderName = reminderName;
         reminder.dose = dose;
         reminder.date = date;

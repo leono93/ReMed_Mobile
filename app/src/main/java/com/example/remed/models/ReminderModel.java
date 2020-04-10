@@ -4,4 +4,5 @@ public class ReminderModel {
     public String reminderName = "";
     public String dose = "";
     public String date;
+    public String id;
 }

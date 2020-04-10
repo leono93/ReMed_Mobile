@@ -42,4 +42,23 @@ public class CloudFirestore {
                 });
     }
 
+    public void delete(String reminderID, FirebaseUser currentUser) {
+        // Access a Cloud Firestore instance from your Activity
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .document(currentUser.getUid())
+                .collection("user_reminders").document(reminderID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Firestore Deleting Pill", "Successful");
+                        } else {
+                            Log.d("Firestore Deleting Pill", "failure");
+                        }
+                    }
+                });
+    }
+
 }
