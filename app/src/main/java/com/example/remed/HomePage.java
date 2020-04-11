@@ -68,14 +68,22 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     private RecyclerView recyclerView;
     private EventRecurrence mEventRecurrence = new EventRecurrence();
     String mRrule, day, time;
-    TextView time_edit_text, dateTextView;
+    FloatingActionButton fab;
+    TextView  dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         setUpFirebaseAuthentication();
+        init();
+        setUpListView();
+        loadReminders();
+        setUpWidgets();
 
+    }
+
+    private void init() {
         reminderList = new ArrayList<>();
         reminderAdapter = new ReminderAdapter(reminderList, HomePage.this, currentUser);
         recyclerView = findViewById(R.id.list);
@@ -83,72 +91,79 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         dateTextView = findViewById(R.id.dateTextView);
         dateTextView.setText(getDayOfWeek());
 
-        setUpListView();
-        loadReminders();
-        FloatingActionButton fab = findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
+    }
+
+    private void setUpWidgets(){
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                time = "";
-                final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
-                View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
-                bottomSheetDialog.setContentView(dialogView);
-                bottomSheetDialog.setTitle("Mahmoud");
-                bottomSheetDialog.show();
-
-                Button button = bottomSheetDialog.findViewById(R.id.add_pill_button);
-                final EditText medicine_edit_text = bottomSheetDialog.findViewById(R.id.medicine_edit_text);
-                final EditText dose_edit_text = bottomSheetDialog.findViewById(R.id.dose_edit_text);
-                final TextView time_edit_text = bottomSheetDialog.findViewById(R.id.time_text_view);
-                final TextView day_text_view = bottomSheetDialog.findViewById(R.id.day_text_view);
-
-                time_edit_text.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        timeDialog(time_edit_text);
-                        time_edit_text.setText(time);
-                    }
-                });
-
-                day_text_view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dayDialog();
-                    }
-                });
-
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && time.equals("")) {
-                            Toast.makeText(HomePage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Map<String, String> pillMap = new HashMap<>();
-                            pillMap.put("medicine_name", medicine_edit_text.getText().toString());
-                            pillMap.put("dose", dose_edit_text.getText().toString());
-                            pillMap.put("time", time);
-                            pillMap.put("day", day);
-                            CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
-                            cloudFirestore.addPill(pillMap);
-                            bottomSheetDialog.hide();
-                            Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
-                            loadReminders();
-                        }
-
-                    }
-                });
+              setUpDialog();
             }
         });
     }
 
-    private String getDayOfWeek(){
+    private void setUpDialog(){
+        time = "";
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+        bottomSheetDialog.setContentView(dialogView);
+        bottomSheetDialog.setTitle("Mahmoud");
+        bottomSheetDialog.show();
+
+        Button addPillButton = bottomSheetDialog.findViewById(R.id.add_pill_button);
+        final EditText medicine_edit_text = bottomSheetDialog.findViewById(R.id.medicine_edit_text);
+        final EditText dose_edit_text = bottomSheetDialog.findViewById(R.id.dose_edit_text);
+        final TextView time_edit_text = bottomSheetDialog.findViewById(R.id.time_text_view);
+        final TextView day_text_view = bottomSheetDialog.findViewById(R.id.day_text_view);
+
+        assert time_edit_text != null;
+        time_edit_text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                timeDialog(time_edit_text);
+                time_edit_text.setText(time);
+            }
+        });
+
+        assert day_text_view != null;
+        day_text_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dayDialog();
+            }
+        });
+
+        assert addPillButton != null;
+        addPillButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && time.equals("")) {
+                    Toast.makeText(HomePage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Map<String, String> pillMap = new HashMap<>();
+                    pillMap.put("medicine_name", medicine_edit_text.getText().toString());
+                    pillMap.put("dose", dose_edit_text.getText().toString());
+                    pillMap.put("time", time);
+                    pillMap.put("day", day);
+                    CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
+                    cloudFirestore.addPill(pillMap);
+                    bottomSheetDialog.hide();
+                    Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
+                    loadReminders();
+                }
+
+            }
+        });
+    }
+
+    private String getDayOfWeek() {
         LocalDate date = LocalDate.now();
         DayOfWeek dow = date.getDayOfWeek();
         return dow.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
 
     private void loadReminders() {
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -161,7 +176,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document != null) {
-                                    if(document.get("day").toString().contains(getDayOfWeek())){
+                                    if (document.get("day").toString().contains(getDayOfWeek())) {
                                         callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
                                     }
                                 }
