@@ -15,7 +15,6 @@ import com.example.remed.R;
 import com.example.remed.models.ReminderModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -23,11 +22,7 @@ import java.util.ArrayList;
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyViewHolder> {
 
     private ArrayList<ReminderModel> reminders;
-    private Context context;
     private FirebaseUser currentUser;
-    private ImageView tourist;
-    private int index = 0;
-
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         TextView reminderName, date, dose;
@@ -44,7 +39,6 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
 
     public ReminderAdapter(ArrayList<ReminderModel> reminders, Context context, FirebaseUser currentUser) {
         this.reminders = reminders;
-        this.context = context;
         this.currentUser = currentUser;
     }
 
@@ -66,11 +60,11 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
             @Override
             public void onClick(View view) {
 
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
                 FirebaseAuth mAuth;
                 mAuth = FirebaseAuth.getInstance();
                 currentUser = mAuth.getCurrentUser();
                 CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
+                assert currentUser != null;
                 cloudFirestore.delete(reminderModel.id, currentUser);
             }
         });
