@@ -127,14 +127,13 @@
                 android:textSize="20sp"
                 android:textStyle="bold"/>
 
-            <Spinner
-                android:id="@+id/language_spinner"
+            <TextView
+                android:id="@+id/language_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/language"
                 android:layout_marginLeft="20dp"
-                android:textColor="#696969"
-                android:textStyle="bold"/>
+                android:textColor="#808080"
+                android:layout_marginBottom="15dp" />
 
         </LinearLayout>
 
