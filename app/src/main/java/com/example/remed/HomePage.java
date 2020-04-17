@@ -1,5 +1,11 @@
 package com.example.remed;
 
+
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -35,10 +41,14 @@ import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
+
+import android.widget.ImageButton;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import org.w3c.dom.Text;
 
@@ -98,6 +108,23 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
+                View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+                bottomSheetDialog.setContentView(dialogView);
+                bottomSheetDialog.setTitle("Mahmoud");
+                bottomSheetDialog.show();
+
+            }
+        });
+
+        ImageButton set = findViewById(R.id.settingButton);
+        set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomePage.this, SettingActivity.class);
+                startActivity(intent);
+
               setUpDialog();
             }
         });
@@ -155,6 +182,22 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
 
             }
         });
+
+
+        /*get notification permission*/
+        NotificationManager notificationManager =
+                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+            Intent intent = new Intent(
+                    android.provider.Settings
+                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+            startActivity(intent);
+        }
+
     }
 
     private String getDayOfWeek() {
