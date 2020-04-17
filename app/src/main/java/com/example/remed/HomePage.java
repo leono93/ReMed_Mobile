@@ -164,6 +164,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private void loadReminders() {
+        Log.d("momom", "loading");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -176,7 +177,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document != null) {
-                                    if (document.get("day").toString().contains(getDayOfWeek())) {
+                                    if (document.get("day").toString().contains(getDayOfWeek().substring(0, 3))) {
                                         callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
                                     }
                                 }
