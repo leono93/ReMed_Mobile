@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "621696003254-r8rrofprmlvitlanifhcc331v86gtqln.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.remed",
+            "certificate_hash": "4b6c68b264cd4afc3eb8adf01f10e9a1da7ab202"
+          }
+        },
+        {
           "client_id": "621696003254-4p4t19tua1qir6c5b7pj8b6j1bc1h7n5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
