@@ -3,20 +3,26 @@ package com.example.remed;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,6 +41,9 @@ public class SettingActivity extends AppCompatActivity {
     private ImageButton back_btn;
     private TextView account;
     private TextView lang;
+    private Switch sound;
+    private AudioManager audio;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +58,19 @@ public class SettingActivity extends AppCompatActivity {
         back_btn = findViewById(R.id.backButton);
         account = findViewById(R.id.account_textView);
         lang = findViewById(R.id.language_textview);
+        sound = findViewById(R.id.sound_switch);
+
+        audio = (AudioManager) getSystemService(Service.AUDIO_SERVICE);
+
+        if(audio.getRingerMode() != 2) {
+            sound.setChecked(false);
+        }
+        else{
+            sound.setChecked(true);
+        }
+
         context = SettingActivity.this;
+
     }
 
     private void setUpWidgets(){
@@ -75,6 +96,22 @@ public class SettingActivity extends AppCompatActivity {
         else{
             lang.setText(R.string.english);
         }
+
+//        audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        sound.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if(isChecked) {
+                    audio.setRingerMode(2);
+                }
+                else {
+                    audio.setRingerMode(0);
+                }
+            }
+
+        });
+
 
 
         back_btn.setOnClickListener(new View.OnClickListener() {

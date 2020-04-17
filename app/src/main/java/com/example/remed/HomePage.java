@@ -1,6 +1,9 @@
 package com.example.remed;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -44,7 +47,19 @@ public class HomePage extends AppCompatActivity {
         });
 
 
+        /*get notification permission*/
+        NotificationManager notificationManager =
+                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+            Intent intent = new Intent(
+                    android.provider.Settings
+                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+            startActivity(intent);
+        }
 
     }
 
