@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
-            android:text="Add Medicine"
+            android:text="Add Reminder"
             android:textColor="#000"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -43,7 +43,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/workoutEt"
+            android:id="@+id/medicine_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
             android:layout_below="@id/setting_identifier"
@@ -58,15 +58,15 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/workoutEt"
+            android:layout_below="@id/medicine_edit_text"
             android:layout_gravity="center_horizontal"
             android:background="@color/grey" />
 
         <TextView
-            android:id="@+id/time_identifier"
+            android:id="@+id/dose_identifier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/workoutEt"
+            android:layout_below="@id/medicine_edit_text"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
@@ -77,13 +77,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/timeTv"
+            android:id="@+id/dose_edit_text"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
-            android:layout_below="@id/time_identifier"
+            android:layout_below="@id/dose_identifier"
             android:background="@null"
             android:fontFamily="serif-monospace"
             android:hint="Dose"
+            android:inputType="number"
             android:textColor="@color/outline"
             android:textColorHint="@color/grey"
             android:textSize="20sp"
@@ -93,7 +94,44 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/timeTv"
+            android:layout_below="@id/dose_edit_text"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/time_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dose_edit_text"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="serif-monospace"
+            android:text="Time"
+            android:textColor="@color/identifier_grey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SignInEditTextHeight"
+            android:layout_below="@id/time_identifier"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dialog_options_bg"
+            android:fontFamily="serif-monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Time"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/time_text_view"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
@@ -102,7 +140,7 @@
             android:id="@+id/day_identifier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/timeTv"
+            android:layout_below="@id/time_text_view"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="20dp"
@@ -112,8 +150,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+
         <TextView
-            android:id="@+id/dayTv"
+            android:id="@+id/day_text_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/SignInEditTextHeight"
             android:layout_below="@id/day_identifier"
@@ -129,7 +168,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:layout_below="@id/dayTv"
+            android:layout_below="@id/time_text_view"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
@@ -138,6 +177,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/add_pill_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
