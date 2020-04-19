@@ -31,7 +31,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,19 +48,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import org.w3c.dom.Text;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
 public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener,
         TimePickerDialogFragment.TimePickerDialogHandler {
@@ -79,7 +72,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     private EventRecurrence mEventRecurrence = new EventRecurrence();
     String mRrule, day, time;
     FloatingActionButton fab;
-    TextView  dateTextView;
+    TextView dateTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +97,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         fab = findViewById(R.id.fab);
     }
 
-    private void setUpWidgets(){
+    private void setUpWidgets() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,12 +118,12 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 Intent intent = new Intent(HomePage.this, SettingActivity.class);
                 startActivity(intent);
 
-              setUpDialog();
+                setUpDialog();
             }
         });
     }
 
-    private void setUpDialog(){
+    private void setUpDialog() {
         time = "";
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
         View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
