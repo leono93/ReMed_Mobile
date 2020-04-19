@@ -1,10 +1,12 @@
 package com.example.remed;
+
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.content.res.Resources;
 import android.os.Bundle;
+
 import com.codetroopers.betterpickers.recurrencepicker.EventRecurrence;
 import com.codetroopers.betterpickers.recurrencepicker.EventRecurrenceFormatter;
 import com.codetroopers.betterpickers.recurrencepicker.RecurrencePickerDialogFragment;
@@ -22,12 +24,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
@@ -37,6 +41,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -186,6 +191,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         db.collection("users").document(currentUser.getUid()).collection("user_reminders")
+                .orderBy("time")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -193,7 +199,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document != null) {
-                                    if (document.get("day").toString().contains(getDayOfWeek().substring(0, 3))) {
+                                    if (document.get("day").toString().contains("Thu")) {
                                         callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
                                     }
                                 }
