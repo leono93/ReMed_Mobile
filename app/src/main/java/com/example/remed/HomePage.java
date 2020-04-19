@@ -1,14 +1,10 @@
 package com.example.remed;
-
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import android.content.res.Resources;
 import android.os.Bundle;
-
 import com.codetroopers.betterpickers.recurrencepicker.EventRecurrence;
 import com.codetroopers.betterpickers.recurrencepicker.EventRecurrenceFormatter;
 import com.codetroopers.betterpickers.recurrencepicker.RecurrencePickerDialogFragment;
@@ -17,37 +13,30 @@ import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.example.remed.models.ReminderModel;
 import com.example.remed.utils.CloudFirestore;
 import com.example.remed.utils.ReminderAdapter;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.ImageButton;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -83,7 +72,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         setUpListView();
         loadReminders();
         setUpWidgets();
-
     }
 
     private void init() {
@@ -101,7 +89,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
                 bottomSheetDialog.setContentView(dialogView);
@@ -117,7 +104,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, SettingActivity.class);
                 startActivity(intent);
-
                 setUpDialog();
             }
         });
@@ -172,22 +158,17 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                     Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
                     loadReminders();
                 }
-
             }
         });
 
 
         /*get notification permission*/
-        NotificationManager notificationManager =
-                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
-
+        NotificationManager notificationManager = (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && !notificationManager.isNotificationPolicyAccessGranted()) {
-
             Intent intent = new Intent(
                     android.provider.Settings
                             .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-
             startActivity(intent);
         }
 
@@ -200,7 +181,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private void loadReminders() {
-        Log.d("momom", "loading");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -298,14 +278,11 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private void populateRepeats() {
-
         Resources r = getResources();
         String repeatString = "";
-
         if (!TextUtils.isEmpty(mRrule)) {
             repeatString = EventRecurrenceFormatter.getRepeatString(this, r, mEventRecurrence, true);
         }
-
         day = repeatString;
     }
 
