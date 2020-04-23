@@ -107,6 +107,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 bottomSheetDialog.setContentView(dialogView);
                 bottomSheetDialog.setTitle("Mahmoud");
                 bottomSheetDialog.show();
+                setUpDialog();
 
             }
         });
@@ -117,8 +118,19 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, SettingActivity.class);
                 startActivity(intent);
+                /*get notification permission*/
+                NotificationManager notificationManager =
+                        (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-                setUpDialog();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+                    Intent intent1 = new Intent(
+                            android.provider.Settings
+                                    .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+                    startActivity(intent1);
+                }
             }
         });
     }
@@ -128,7 +140,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
         View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
         bottomSheetDialog.setContentView(dialogView);
-        bottomSheetDialog.setTitle("Mahmoud");
         bottomSheetDialog.show();
 
         Button addPillButton = bottomSheetDialog.findViewById(R.id.add_pill_button);
@@ -137,7 +148,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         final TextView time_edit_text = bottomSheetDialog.findViewById(R.id.time_text_view);
         final TextView day_text_view = bottomSheetDialog.findViewById(R.id.day_text_view);
 
-        assert time_edit_text != null;
         time_edit_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,25 +181,12 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                     bottomSheetDialog.hide();
                     Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
                     loadReminders();
+                    bottomSheetDialog.hide();
                 }
 
             }
         });
 
-
-        /*get notification permission*/
-        NotificationManager notificationManager =
-                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && !notificationManager.isNotificationPolicyAccessGranted()) {
-
-            Intent intent = new Intent(
-                    android.provider.Settings
-                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-
-            startActivity(intent);
-        }
 
     }
 
