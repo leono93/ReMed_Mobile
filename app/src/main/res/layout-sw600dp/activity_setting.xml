@@ -40,13 +40,13 @@
             android:gravity="center_horizontal"
             android:text="Settings"
             android:textColor="#FFF"
-            android:textSize="30sp" />
+            android:textSize="50sp" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="385dp"
-        android:layout_height="534dp"
+        android:layout_width="590dp"
+        android:layout_height="818dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
@@ -66,14 +66,14 @@
             android:gravity="center"
             android:text="ACCOUNT"
             android:textColor="#000000"
-            android:textSize="23sp"
+            android:textSize="40sp"
             android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="30dp"
             android:fontFamily="serif-monospace"
             android:orientation="vertical">
@@ -82,68 +82,69 @@
                 android:id="@+id/account_identifier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Account"
                 android:textColor="@color/purple4"
-                android:layout_marginBottom="5dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/account_textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/identifier_grey"
-                android:textSize="20sp"
                 android:layout_marginBottom="15dp"
-                android:text="Email" />
+                android:text="Email"
+                android:textColor="@color/identifier_grey"
+                android:textSize="30sp" />
 
 
             <TextView
                 android:id="@+id/language_identifier"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:text="Language"
                 android:textColor="@color/purple4"
-                android:layout_marginBottom="5dp"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/language_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="15dp"
                 android:textColor="@color/identifier_grey"
-                android:textSize="20sp"
-                android:layout_marginBottom="15dp" />
+                android:textSize="30sp" />
 
             <Switch
                 android:id="@+id/sound_switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/purple4"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="50dp"
                 android:text="Sound"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textColor="@color/purple4"
+                android:textSize="35sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/logout_btn"
-            android:layout_width="350dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="60dp"
+            android:layout_width="520dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="20dp"
-            android:layout_marginLeft="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="60dp"
-            android:background="@drawable/button_design1"
+            android:background="@drawable/button_design2"
             android:gravity="center"
             android:text="Logout"
-            android:textSize="20sp" />
+            android:textSize="40sp" />
 
     </LinearLayout>
 
