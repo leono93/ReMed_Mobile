@@ -75,7 +75,7 @@
             android:fontFamily="@font/abhaya_libre"
             android:text="10 March 2020"
             android:textColor="#000"
-            android:textSize="42sp" />
+            android:textSize="40sp" />
 
         <ImageView
             android:id="@+id/rightArrow"
