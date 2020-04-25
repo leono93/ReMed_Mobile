@@ -72,7 +72,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     String mRrule, day, time;
     FloatingActionButton fab;
     TextView dateTextView;
-    Button settingsButton;
+    ImageButton settingsButton;
 
 
     @Override
