@@ -56,8 +56,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener,
-        TimePickerDialogFragment.TimePickerDialogHandler {
+public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener, TimePickerDialogFragment.TimePickerDialogHandler {
 
     private static final String TAG = "HomePageActivity";
     private static final String FRAG_TAG_RECUR_PICKER = "recurrencePickerDialogFragment";
@@ -73,6 +72,8 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     String mRrule, day, time;
     FloatingActionButton fab;
     TextView dateTextView;
+    Button settingsButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminderList = new ArrayList<>();
         reminderAdapter = new ReminderAdapter(reminderList, HomePage.this, currentUser);
         recyclerView = findViewById(R.id.list);
-
+        settingsButton = findViewById(R.id.settingButton);
         dateTextView = findViewById(R.id.dateTextView);
         dateTextView.setText(getDayOfWeek());
 
@@ -102,18 +103,47 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             @Override
             public void onClick(View view) {
 
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
-                View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
-                bottomSheetDialog.setContentView(dialogView);
-                bottomSheetDialog.setTitle("Mahmoud");
-                bottomSheetDialog.show();
-                setUpDialog();
 
+                FloatingActionButton fab = findViewById(R.id.fab);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
+                        View dialogView = getLayoutInflater().inflate(R.layout.bottom_sheet, null);
+                        bottomSheetDialog.setContentView(dialogView);
+                        bottomSheetDialog.setTitle("Mahmoud");
+                        bottomSheetDialog.show();
+                        setUpDialog();
+
+                    }
+                });
+
+                ImageButton set = findViewById(R.id.settingButton);
+                set.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomePage.this, SettingActivity.class);
+                        startActivity(intent);
+                        /*get notification permission*/
+                        NotificationManager notificationManager =
+                                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+                            Intent intent1 = new Intent(
+                                    android.provider.Settings
+                                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+                            startActivity(intent1);
+                        }
+                    }
+                });
             }
+
         });
 
-        ImageButton set = findViewById(R.id.settingButton);
-        set.setOnClickListener(new View.OnClickListener() {
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, SettingActivity.class);
@@ -133,6 +163,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 }
             }
         });
+
     }
 
     private void setUpDialog() {
@@ -155,6 +186,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 time_edit_text.setText(time);
             }
         });
+
 
         assert day_text_view != null;
         day_text_view.setOnClickListener(new View.OnClickListener() {
@@ -323,4 +355,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             time = hourOfDay + ":" + minute;
         }
     }
+
+
 }

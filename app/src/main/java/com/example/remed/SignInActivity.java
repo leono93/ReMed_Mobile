@@ -1,5 +1,6 @@
 package com.example.remed;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +30,11 @@ import java.util.Objects;
 
 import static com.google.android.gms.auth.api.credentials.CredentialPickerConfig.Prompt.SIGN_IN;
 
+
+
 public class SignInActivity extends AppCompatActivity {
+
+    Button sign_in_button;
 
     private static final String TAG = "SignInActivity";
 
@@ -43,12 +48,10 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
 
     Context context;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-
         initializeGoogleAuth();
         initialize();
         setUpWidgets();
@@ -147,5 +150,6 @@ public class SignInActivity extends AppCompatActivity {
         if (authStateListener != null) {
             authentication.removeAuthStateListener(authStateListener);
         }
+
     }
 }
