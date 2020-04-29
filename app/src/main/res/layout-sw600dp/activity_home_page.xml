@@ -26,12 +26,12 @@
             android:fontFamily="@font/abhaya_libre"
             android:text="ReMed"
             android:textColor="#FFF"
-            android:textSize="50sp" />
+            android:textSize="30sp" />
 
         <ImageButton
             android:id="@+id/settingButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="end"
@@ -48,19 +48,19 @@
         android:id="@+id/dateRelativeLayout"
         android:layout_width="wrap_content"
         android:background="#fff"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/backArrow"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
-            android:contentDescription="TODO"
+            android:background="#FFFFFF"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
         <TextView
@@ -75,18 +75,19 @@
             android:fontFamily="@font/abhaya_libre"
             android:text="10 March 2020"
             android:textColor="#000"
-            android:textSize="40sp" />
+            android:textSize="26sp" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/rightArrow"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_gravity="end"
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
+            android:background="#FFFFFF"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
     </RelativeLayout>
@@ -101,7 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="27sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:text="Morning"/>
 
@@ -118,10 +119,10 @@
             android:layout_below="@id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textSize="27sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:text="Afternoon" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -137,10 +138,10 @@
             android:layout_below="@id/list2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:textSize="27sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:layout_marginTop="5dp"
             android:text="Evening" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -163,7 +164,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="26dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginRight="26dp"
         android:layout_marginBottom="36dp"
         android:src="@drawable/ic_add_black_24dp"
         app:backgroundTint="#00B0FF" />
