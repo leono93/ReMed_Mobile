@@ -1,11 +1,9 @@
 package com.example.remed;
 
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-
 import android.content.res.Resources;
 import android.os.Bundle;
 
@@ -17,12 +15,10 @@ import com.codetroopers.betterpickers.timepicker.TimePickerDialogFragment;
 import com.example.remed.models.ReminderModel;
 import com.example.remed.utils.CloudFirestore;
 import com.example.remed.utils.ReminderAdapter;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,9 +36,7 @@ import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
-
 import android.widget.ImageButton;
-
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -84,7 +78,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         setUpListView();
         loadReminders();
         setUpWidgets();
-
     }
 
     private void init() {
@@ -98,7 +91,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         fab = findViewById(R.id.fab);
     }
 
-    private void setUpWidgets() {
+  private void setUpWidgets() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,7 +158,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         });
 
     }
-
     private void setUpDialog() {
         time = "";
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
@@ -229,12 +221,12 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private void loadReminders() {
-        Log.d("momom", "loading");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         db.collection("users").document(currentUser.getUid()).collection("user_reminders")
+                .orderBy("time")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -327,14 +319,11 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private void populateRepeats() {
-
         Resources r = getResources();
         String repeatString = "";
-
         if (!TextUtils.isEmpty(mRrule)) {
             repeatString = EventRecurrenceFormatter.getRepeatString(this, r, mEventRecurrence, true);
         }
-
         day = repeatString;
     }
 
