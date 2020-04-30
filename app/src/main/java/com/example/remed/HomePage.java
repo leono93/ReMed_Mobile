@@ -99,6 +99,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                 bottomSheetDialog.setContentView(dialogView);
                 bottomSheetDialog.setTitle("Mahmoud");
                 bottomSheetDialog.show();
+                setUpDialog();
 
             }
         });
@@ -109,7 +110,15 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, SettingActivity.class);
                 startActivity(intent);
-                setUpDialog();
+                /*get notification permission*/
+                NotificationManager notificationManager = (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && !notificationManager.isNotificationPolicyAccessGranted()) {
+                    Intent intent1 = new Intent(
+                            android.provider.Settings
+                                    .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                    startActivity(intent1);
+                }
             }
         });
     }
@@ -167,15 +176,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         });
 
 
-        /*get notification permission*/
-        NotificationManager notificationManager = (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && !notificationManager.isNotificationPolicyAccessGranted()) {
-            Intent intent = new Intent(
-                    android.provider.Settings
-                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-            startActivity(intent);
-        }
+
 
     }
 

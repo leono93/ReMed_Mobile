@@ -61,4 +61,42 @@ public class CloudFirestore {
                 });
     }
 
+    public void updateDate(String reminderID, FirebaseUser currentUser, String newTime) {
+        // Access a Cloud Firestore instance from your Activity
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .document(currentUser.getUid())
+                .collection("user_reminders").document(reminderID).update("time", newTime).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Firestore Updating Pill", "Successful");
+                } else {
+                    Log.d("Firestore Updating Pill", "failure");
+                }
+            }
+        });
+    }
+
+    public void updateDose(String reminderID, FirebaseUser currentUser, String newDose) {
+        // Access a Cloud Firestore instance from your Activity
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .document(currentUser.getUid())
+                .collection("user_reminders").document(reminderID).update("dose", newDose).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d("Firestore Updating Dose", "Successful");
+                } else {
+                    Log.d("Firestore Updating Dose", "failure");
+                }
+            }
+        });
+    }
+
 }
