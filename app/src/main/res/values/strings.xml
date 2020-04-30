@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">ReMed</string>
     <string name="title_activity_home_page">ReMed</string>
+
     <string name="english">English</string>
     <string name="korean">한국어</string>
     <string name="sample_date">10 March 2020</string>
+
 </resources>

@@ -7,4 +7,13 @@
     <color name="grey">#E6E7E8</color>
     <color name="outline">#1e88e5</color>
     <color name="white">#ffffff</color>
+
+
+    <color name="purple1">#f4eeff</color>
+    <color name="purple2">#dcd6f7</color>
+    <color name="purple3">#a6b1e1</color>
+    <color name="purple4">#424874</color>
+
+
+
 </resources>
