@@ -42,13 +42,16 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/dose_icon"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/dose"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
+                android:inputType="number"
+                android:background="@null"
+                android:cursorVisible="false"
                 android:text="1 Tablet"
                 android:textColor="#000"
                 android:textSize="20sp" />
