@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="90dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <RelativeLayout
+        android:layout_width="550dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/dialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif-monospace"
+            android:text="Add Reminder"
+            android:textColor="#000"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/setting_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dialogTitle"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="serif-monospace"
+            android:text="Medicine"
+            android:textColor="@color/identifier_grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/medicine_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SignInEditTextHeight"
+            android:layout_below="@id/setting_identifier"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:fontFamily="serif-monospace"
+            android:hint="Medicine"
+            android:textColor="@color/outline"
+            android:textColorHint="@color/grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/medicine_edit_text"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/dose_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/medicine_edit_text"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="serif-monospace"
+            android:text="Dose"
+            android:textColor="@color/identifier_grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/dose_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/SignInEditTextHeight"
+            android:layout_below="@id/dose_identifier"
+            android:layout_marginTop="15dp"
+            android:background="@null"
+            android:fontFamily="serif-monospace"
+            android:hint="Dose"
+            android:inputType="number"
+            android:textColor="@color/outline"
+            android:textColorHint="@color/grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/dose_edit_text"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/time_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dose_edit_text"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="serif-monospace"
+            android:text="Time"
+            android:textColor="@color/identifier_grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/time_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/time_identifier"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dialog_options_bg"
+            android:fontFamily="serif-monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Time"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/time_text_view"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
+        <TextView
+            android:id="@+id/day_identifier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time_text_view"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="25dp"
+            android:fontFamily="serif-monospace"
+            android:text="Day"
+            android:textColor="@color/identifier_grey"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/day_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/day_identifier"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/dialog_options_bg"
+            android:fontFamily="serif-monospace"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Day"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/time_text_view"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey" />
+
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/add_pill_button"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="55dp"
+        android:background="#00B0FF"
+        android:text="Add Medicine"
+        android:textSize="30sp"
+        android:textColor="#fff" />
+
+</LinearLayout>
