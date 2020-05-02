@@ -26,7 +26,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -43,12 +42,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -65,24 +62,11 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     private ArrayList<ReminderModel> reminderList;
     private RecyclerView.Adapter reminderAdapter;
     private RecyclerView recyclerView;
-    private ArrayList<ReminderModel> reminderList2;
-    private RecyclerView.Adapter reminderAdapter2;
-    private RecyclerView recyclerView2;
-    private ArrayList<ReminderModel> reminderList3;
-    private RecyclerView.Adapter reminderAdapter3;
-    private RecyclerView recyclerView3;
-
     private EventRecurrence mEventRecurrence = new EventRecurrence();
     String mRrule, day, time;
     FloatingActionButton fab;
     TextView dateTextView;
     ImageButton settingsButton;
-    ImageButton backButton;
-    ImageButton rightButton;
-
-    Calendar calendar;
-    SimpleDateFormat dateFormat;
-    private String dateSet = null;
 
 
     @Override
@@ -100,68 +84,19 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminderList = new ArrayList<>();
         reminderAdapter = new ReminderAdapter(reminderList, HomePage.this, currentUser);
         recyclerView = findViewById(R.id.list);
-
-        reminderList2 = new ArrayList<>();
-        reminderAdapter2 = new ReminderAdapter(reminderList2, HomePage.this, currentUser);
-        recyclerView2 = findViewById(R.id.list2);
-
-        reminderList3 = new ArrayList<>();
-        reminderAdapter3 = new ReminderAdapter(reminderList3, HomePage.this, currentUser);
-        recyclerView3 = findViewById(R.id.list3);
-
         settingsButton = findViewById(R.id.settingButton);
         dateTextView = findViewById(R.id.dateTextView);
-
         dateTextView.setText(getDayOfWeek());
 
         fab = findViewById(R.id.fab);
-        backButton = findViewById(R.id.backArrow);
-        rightButton = findViewById(R.id.rightArrow);
     }
 
-  private void setUpArrowButtons() {
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(dateSet.length() == 9 && Integer.parseInt(dateSet.substring(8,9)) == 1){
-                    calendar.roll(Calendar.MONTH,-1);
-                    calendar.roll(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE)-1);
-                }
-                else {
-                    calendar.roll(Calendar.DATE, -1);
-                }
-
-                dateSet = dateFormat.format(calendar.getTime());
-                dateTextView.setText(dateSet);
-                loadReminders();
-            }
-        });
-
-        rightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int max = calendar.getActualMaximum(Calendar.DATE);
-
-                if(dateSet.length() == 10 && Integer.parseInt(dateSet.substring(8,10)) == max){
-                    calendar.roll(Calendar.MONTH,1);
-                    calendar.roll(Calendar.DATE, -(max-1));
-                }
-                else {
-                    calendar.roll(Calendar.DATE, 1);
-                }
-
-                dateSet = dateFormat.format(calendar.getTime());
-                dateTextView.setText(dateSet);
-                loadReminders();
-            }
-        });
-    }
-
-
-    private void setUpWidgets() {
+  private void setUpWidgets() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 FloatingActionButton fab = findViewById(R.id.fab);
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -172,9 +107,33 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         bottomSheetDialog.setTitle("Mahmoud");
                         bottomSheetDialog.show();
                         setUpDialog();
+
+                    }
+                });
+
+                ImageButton set = findViewById(R.id.settingButton);
+                set.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(HomePage.this, SettingActivity.class);
+                        startActivity(intent);
+                        /*get notification permission*/
+                        NotificationManager notificationManager =
+                                (NotificationManager) HomePage.this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                                && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+                            Intent intent1 = new Intent(
+                                    android.provider.Settings
+                                            .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+                            startActivity(intent1);
+                        }
                     }
                 });
             }
+
         });
 
         settingsButton.setOnClickListener(new View.OnClickListener() {
@@ -198,9 +157,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             }
         });
 
-        setUpArrowButtons();
     }
-  
     private void setUpDialog() {
         time = "";
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
@@ -258,20 +215,12 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
     }
 
     private String getDayOfWeek() {
-
-        calendar = Calendar.getInstance();
-        dateFormat = new SimpleDateFormat("EEE MMM d");
-        dateSet = dateFormat.format(calendar.getTime());
-        return dateSet;
+        LocalDate date = LocalDate.now();
+        DayOfWeek dow = date.getDayOfWeek();
+        return dow.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
     }
 
     private void loadReminders() {
-        Log.d("momom", "loading");
-
-        reminderList.clear();
-        reminderList2.clear();
-        reminderList3.clear();
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth mAuth;
         mAuth = FirebaseAuth.getInstance();
@@ -284,15 +233,13 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if (document.get("day").toString().contains(dateSet.substring(0, 3)))
+                                if (document != null) {
+                                    if (document.get("day").toString().contains(getDayOfWeek().substring(0, 3))) {
                                         callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
+                                    }
+                                }
                             }
-
-                            reminderAdapter.notifyDataSetChanged();
-                            reminderAdapter2.notifyDataSetChanged();
-                            reminderAdapter3.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
@@ -305,29 +252,8 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminder.reminderName = reminderName;
         reminder.dose = dose;
         reminder.date = date;
-
-
-        int h;
-        if(date.substring(1,2).equals(":")) {
-            h = Integer.parseInt(date.substring(0,1));
-        }
-        else {
-            h = Integer.parseInt(date.substring(0,2));
-        }
-
-        if(h < 12 && h > 6) {
-            reminderList.add(reminder);
-            reminderAdapter.notifyDataSetChanged();
-        }
-        else if(h >= 12 && h <= 19) {
-            reminderList2.add(reminder);
-            reminderAdapter2.notifyDataSetChanged();
-        }
-        else {
-            reminderList3.add(reminder);
-            reminderAdapter3.notifyDataSetChanged();
-        }
-
+        reminderList.add(reminder);
+        reminderAdapter.notifyDataSetChanged();
     }
 
     private void setUpListView() {
@@ -335,16 +261,6 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(reminderAdapter);
-
-        RecyclerView.LayoutManager mLayoutManager2 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView2.setLayoutManager(mLayoutManager2);
-        recyclerView2.setItemAnimator(new DefaultItemAnimator());
-        recyclerView2.setAdapter(reminderAdapter2);
-
-        RecyclerView.LayoutManager mLayoutManager3 = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-        recyclerView3.setLayoutManager(mLayoutManager3);
-        recyclerView3.setItemAnimator(new DefaultItemAnimator());
-        recyclerView3.setAdapter(reminderAdapter3);
     }
 
     private void dayDialog() {
