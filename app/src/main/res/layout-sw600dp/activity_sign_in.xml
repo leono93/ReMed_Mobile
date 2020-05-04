@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#00B0FF"
+    android:background="@color/purple2"
     tools:context=".SignInActivity">
 
     <TextView
@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/abhaya_libre"
         android:text="ReMed"
-        android:textColor="#fff"
-        android:textSize="55sp"
+        android:textStyle="bold"
+        android:textColor="@color/purple4"
+        android:textSize="65sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,6 +23,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.098" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/welcome_page_art"
+        android:layout_marginBottom="300dp"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/welcome_title"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
