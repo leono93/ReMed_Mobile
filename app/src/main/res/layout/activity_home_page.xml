@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff"
+    android:background="@color/purple2"
     android:layout_height="match_parent"
     tools:context=".HomePage">
 
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
-        android:background="#00B0FF"
+        android:background="@color/purple2"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -20,12 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:gravity="center_horizontal"
+            android:layout_marginStart="-12dp"
+            android:layout_marginLeft="-12dp"
             android:fontFamily="@font/abhaya_libre"
+            android:gravity="center_horizontal"
             android:text="ReMed"
-            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textColor="@color/purple4"
+            android:textSize="50sp" />
             android:textSize="30sp" />
 
         <ImageButton
@@ -38,7 +40,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="#00B0FF"
+            android:background="@color/purple2"
             android:src="@drawable/ic_settings_black_24dp" />
 
     </RelativeLayout>
@@ -47,7 +49,7 @@
         android:layout_below="@id/toolbar"
         android:id="@+id/dateRelativeLayout"
         android:layout_width="wrap_content"
-        android:background="#fff"
+        android:background="@color/purple3"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -60,7 +62,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
-            android:background="#FFFFFF"
+            android:background="@color/purple3"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
         <TextView
@@ -74,7 +76,8 @@
             android:gravity="center_horizontal"
             android:fontFamily="@font/abhaya_libre"
             android:text="10 March 2020"
-            android:textColor="#000"
+            android:textStyle="bold"
+            android:textColor="@color/purple4"
             android:textSize="26sp" />
 
         <ImageButton
@@ -87,7 +90,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
+            android:background="@color/purple3"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
     </RelativeLayout>
@@ -167,6 +170,6 @@
         android:layout_marginRight="26dp"
         android:layout_marginBottom="36dp"
         android:src="@drawable/ic_add_black_24dp"
-        app:backgroundTint="#00B0FF" />
+        app:backgroundTint="@color/purple4" />
 
 </RelativeLayout>
