@@ -5,14 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingActivity">
+    tools:context=".SettingActivity"
+    android:background="@color/purple1">
 
 
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00B0FF"
+        android:background="@color/purple2"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +25,7 @@
             android:layout_height="23dp"
             android:layout_marginTop="9dp"
             android:layout_marginLeft="7dp"
-            android:background="#00B0FF"
+            android:background="@color/purple2"
             app:srcCompat="@drawable/ic_back_button_foreground"
             tools:ignore="VectorDrawableCompat" />
 
@@ -53,6 +54,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical"
+        android:background="@color/purple1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -65,9 +67,9 @@
             android:layout_marginBottom="15dp"
             android:gravity="center"
             android:text="ACCOUNT"
-            android:textColor="#000000"
             android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/purple4"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,7 +97,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="15dp"
                 android:text="Email"
-                android:textColor="@color/identifier_grey"
+                android:textColor="@color/purple4"
                 android:textSize="30sp" />
 
 
@@ -115,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginBottom="15dp"
-                android:textColor="@color/identifier_grey"
+                android:textColor="@color/purple4"
                 android:textSize="30sp" />
 
             <Switch
@@ -141,7 +143,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="60dp"
-            android:background="@drawable/button_design2"
+            android:background="@drawable/buttonstyle"
             android:gravity="center"
             android:text="Logout"
             android:textSize="40sp" />
