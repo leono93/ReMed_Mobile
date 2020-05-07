@@ -29,7 +29,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
@@ -50,13 +49,9 @@ import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener, TimePickerDialogFragment.TimePickerDialogHandler,
@@ -240,20 +235,22 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         addPillButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (medicine_edit_text.getText().toString().equals("") && dose_edit_text.getText().toString().equals("") && time.equals("")) {
+                if (medicine_edit_text.getText().toString().equals("") || dose_edit_text.getText().toString().equals("") || time.equals("") || day.equals("")) {
                     Toast.makeText(HomePage.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                 } else {
                     Map<String, String> pillMap = new HashMap<>();
+
                     pillMap.put("medicine_name", medicine_edit_text.getText().toString());
                     pillMap.put("dose", dose_edit_text.getText().toString());
                     pillMap.put("time", time);
                     pillMap.put("day", day);
+
                     CloudFirestore cloudFirestore = new CloudFirestore(currentUser);
                     cloudFirestore.addPill(pillMap);
                     bottomSheetDialog.hide();
                     Toast.makeText(HomePage.this, "Reminder added!", Toast.LENGTH_SHORT).show();
-                    loadReminders();
                     bottomSheetDialog.hide();
+                    loadReminders();
                 }
 
             }

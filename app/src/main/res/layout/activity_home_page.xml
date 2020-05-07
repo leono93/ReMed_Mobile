@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#fff"
     android:layout_height="match_parent"
+    android:background="@color/purple2"
     tools:context=".HomePage">
 
     <RelativeLayout
         android:id="@+id/toolbar"
         android:layout_width="wrap_content"
-        android:background="@color/purple2"
         android:layout_height="wrap_content"
+        android:background="@color/purple2"
         android:orientation="horizontal">
 
         <TextView
@@ -20,13 +20,15 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:gravity="center_horizontal"
+            android:layout_marginStart="-12dp"
+            android:layout_marginLeft="-12dp"
             android:fontFamily="@font/abhaya_libre"
+            android:gravity="center_horizontal"
             android:text="ReMed"
-            android:textColor="#FFF"
-            android:textSize="30sp" />
+            android:textColor="@color/purple4"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+        android:textSize="30sp" />
 
         <ImageButton
             android:id="@+id/settingButton"
@@ -34,8 +36,8 @@
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_gravity="end"
             android:layout_centerVertical="true"
+            android:layout_gravity="end"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@color/purple2"
@@ -44,12 +46,12 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/toolbar"
         android:id="@+id/dateRelativeLayout"
         android:layout_width="wrap_content"
-        android:background="#fff"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="10dp"
+        android:background="@color/purple3"
         android:orientation="horizontal">
 
 
@@ -60,7 +62,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:layout_marginLeft="15dp"
-            android:background="#FFFFFF"
+            android:background="@color/purple3"
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
         <TextView
@@ -71,11 +73,12 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="2dp"
             android:layout_marginLeft="2dp"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/abhaya_libre"
+            android:gravity="center_horizontal"
             android:text="10 March 2020"
-            android:textColor="#000"
-            android:textSize="26sp" />
+            android:textColor="@color/purple4"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/rightArrow"
@@ -83,74 +86,71 @@
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_gravity="end"
             android:layout_centerVertical="true"
+            android:layout_gravity="end"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
+            android:background="@color/purple3"
             android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_below="@id/dateRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dateRelativeLayout">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="Morning"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Morning"/>
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list"
-            android:layout_below="@id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_below="@id/textView"
+            android:layout_gravity="center"></androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_below="@id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_below="@id/list"
             android:layout_marginTop="5dp"
-            android:text="Afternoon" />
+            android:gravity="center"
+            android:text="Afternoon"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView2"
-            android:layout_gravity="center">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_gravity="center"></androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_below="@id/list2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_below="@id/list2"
             android:layout_marginTop="5dp"
-            android:text="Evening" />
+            android:gravity="center"
+            android:text="Evening"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView3"
-            android:layout_gravity="center">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_gravity="center"></androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 
@@ -166,7 +166,8 @@
         android:layout_marginEnd="26dp"
         android:layout_marginRight="26dp"
         android:layout_marginBottom="36dp"
-        android:src="@drawable/ic_add_black_24dp"
-        android:background="@color/purple2" />
+        android:background="@color/purple2"
+        android:src="@drawable/ic_add_black_24dp" />
+
 
 </RelativeLayout>

@@ -4,7 +4,7 @@
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:background="@color/purple2"
     android:orientation="vertical"
     android:padding="16dp"
     app:behavior_hideable="false"
@@ -14,7 +14,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#fff"
+        android:background="@color/purple2"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="serif-monospace"
             android:text="Add Reminder"
-            android:textColor="#000"
+            android:textColor="@color/purple4"
             android:textSize="23sp"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
             android:text="Medicine"
-            android:textColor="#000"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -50,8 +50,8 @@
             android:background="@null"
             android:fontFamily="serif-monospace"
             android:hint="Medicine"
-            android:textColor="@color/outline"
-            android:textColorHint="@color/grey"
+            android:textColor="@color/purple4"
+            android:textColorHint="@color/purple1"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -72,7 +72,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
             android:text="Dose"
-            android:textColor="#000"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -85,8 +85,8 @@
             android:fontFamily="serif-monospace"
             android:hint="Dose"
             android:inputType="number"
-            android:textColor="@color/outline"
-            android:textColorHint="@color/grey"
+            android:textColor="@color/purple4"
+            android:textColorHint="@color/purple1"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -109,7 +109,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
             android:text="Time"
-            android:textColor="#000"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -124,7 +124,7 @@
             android:fontFamily="serif-monospace"
             android:gravity="center_vertical|center_horizontal"
             android:text="Time"
-            android:textColor="@color/white"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -146,7 +146,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="serif-monospace"
             android:text="Day"
-            android:textColor="#000"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -161,7 +161,7 @@
             android:fontFamily="serif-monospace"
             android:gravity="center_vertical|center_horizontal"
             android:text="Day"
-            android:textColor="@color/white"
+            android:textColor="@color/purple4"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -181,9 +181,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/purple3"
         android:text="Add Medicine"
         android:textSize="20sp"
-        android:textColor="#fff" />
+        android:background="@drawable/buttonstyle" />
 
 </LinearLayout>
