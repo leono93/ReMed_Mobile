@@ -60,7 +60,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener, TimePickerDialogFragment.TimePickerDialogHandler,
-TimePickerDialog.OnTimeSetListener{
+        TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "HomePageActivity";
     private static final String FRAG_TAG_RECUR_PICKER = "recurrencePickerDialogFragment";
@@ -414,8 +414,6 @@ TimePickerDialog.OnTimeSetListener{
 
     //takes variables hourOfDay and minute which the alert will begin at
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText("Hour: " + hourOfDay + " Minute: " + minute);
         Calendar c = Calendar.getInstance();
         c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         c.set(Calendar.MINUTE, minute);
