@@ -1,6 +1,9 @@
 package com.example.remed;
 
+import android.app.AlarmManager;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -28,6 +31,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,8 +45,10 @@ import android.widget.ImageButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -53,7 +59,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener, TimePickerDialogFragment.TimePickerDialogHandler {
+public class HomePage extends AppCompatActivity implements RecurrencePickerDialogFragment.OnRecurrenceSetListener, TimePickerDialogFragment.TimePickerDialogHandler,
+TimePickerDialog.OnTimeSetListener{
 
     private static final String TAG = "HomePageActivity";
     private static final String FRAG_TAG_RECUR_PICKER = "recurrencePickerDialogFragment";
@@ -215,8 +222,8 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         time_edit_text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                timeDialog(time_edit_text);
-                time_edit_text.setText(time);
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
 
@@ -303,7 +310,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         reminder.dose = dose;
         reminder.date = date;
 
-
+        date = date.replace("Notification set for: ", "");
         int h;
         if (date.substring(1, 2).equals(":")) {
             h = Integer.parseInt(date.substring(0, 1));
@@ -405,13 +412,40 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         day = repeatString;
     }
 
-    private void timeDialog(TextView textView) {
+    //takes variables hourOfDay and minute which the alert will begin at
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText("Hour: " + hourOfDay + " Minute: " + minute);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
 
-        TimePickerBuilder tpb = new TimePickerBuilder()
-                .setFragmentManager(getSupportFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment_Light);
-        tpb.show();
-        textView.setText(time);
+        updateTimeText(c);
+        startAlarm(c);
+
+    }
+
+    //updates the original text to show an alert is set
+    private void updateTimeText(Calendar c) {
+        time = "Notification set for: ";
+        time += DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+
+    }
+
+    //starts the alert
+    private void startAlarm(Calendar c) {
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if (c.before(Calendar.getInstance())) {
+            c.add(Calendar.DATE, 1);
+        }
+
+        //RTC_WAKEUP is used so the notification will still activate even if the device is in sleep / lock mode
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     @Override

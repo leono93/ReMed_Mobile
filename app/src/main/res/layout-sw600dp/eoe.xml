@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="EoeIntent">
+
+
+<!--    Not needed for ReMed, xml file for EoeIntent class-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="703dp"
+        android:text="Eoe"
+        android:textSize="100sp" />
+
+
+</LinearLayout>

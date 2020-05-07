@@ -95,7 +95,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.MyView
                 return false;
             }
         });
-        holder.date.setText(reminderModel.date);
+
+        holder.date.setText(reminderModel.date.replace("Notification set for:", ""));
         holder.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
