@@ -181,7 +181,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#00B0FF"
+        android:background="@color/purple3"
         android:text="Add Medicine"
         android:textSize="20sp"
         android:textColor="#fff" />

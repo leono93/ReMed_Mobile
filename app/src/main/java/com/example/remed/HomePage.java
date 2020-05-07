@@ -119,15 +119,14 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
         rightButton = findViewById(R.id.rightArrow);
     }
 
-  private void setUpArrowButtons() {
+    private void setUpArrowButtons() {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dateSet.length() == 9 && Integer.parseInt(dateSet.substring(8,9)) == 1){
-                    calendar.roll(Calendar.MONTH,-1);
-                    calendar.roll(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE)-1);
-                }
-                else {
+                if (dateSet.length() == 9 && Integer.parseInt(dateSet.substring(8, 9)) == 1) {
+                    calendar.roll(Calendar.MONTH, -1);
+                    calendar.roll(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE) - 1);
+                } else {
                     calendar.roll(Calendar.DATE, -1);
                 }
 
@@ -142,11 +141,10 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
             public void onClick(View view) {
                 int max = calendar.getActualMaximum(Calendar.DATE);
 
-                if(dateSet.length() == 10 && Integer.parseInt(dateSet.substring(8,10)) == max){
-                    calendar.roll(Calendar.MONTH,1);
-                    calendar.roll(Calendar.DATE, -(max-1));
-                }
-                else {
+                if (dateSet.length() == 10 && Integer.parseInt(dateSet.substring(8, 10)) == max) {
+                    calendar.roll(Calendar.MONTH, 1);
+                    calendar.roll(Calendar.DATE, -(max - 1));
+                } else {
                     calendar.roll(Calendar.DATE, 1);
                 }
 
@@ -200,7 +198,7 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
 
         setUpArrowButtons();
     }
-  
+
     private void setUpDialog() {
         time = "";
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HomePage.this);
@@ -285,14 +283,13 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 if (document.get("day").toString().contains(dateSet.substring(0, 3)))
-                                        callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
+                                    callAdapter(document.get("medicine_name").toString(), document.get("dose").toString(), document.get("time").toString(), document.getId());
                             }
 
                             reminderAdapter.notifyDataSetChanged();
                             reminderAdapter2.notifyDataSetChanged();
                             reminderAdapter3.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Log.w(TAG, "Error getting documents.", task.getException());
                         }
                     }
@@ -308,22 +305,19 @@ public class HomePage extends AppCompatActivity implements RecurrencePickerDialo
 
 
         int h;
-        if(date.substring(1,2).equals(":")) {
-            h = Integer.parseInt(date.substring(0,1));
-        }
-        else {
-            h = Integer.parseInt(date.substring(0,2));
+        if (date.substring(1, 2).equals(":")) {
+            h = Integer.parseInt(date.substring(0, 1));
+        } else {
+            h = Integer.parseInt(date.substring(0, 2));
         }
 
-        if(h < 12 && h > 6) {
+        if (h < 12 && h > 6) {
             reminderList.add(reminder);
             reminderAdapter.notifyDataSetChanged();
-        }
-        else if(h >= 12 && h <= 19) {
+        } else if (h >= 12 && h <= 19) {
             reminderList2.add(reminder);
             reminderAdapter2.notifyDataSetChanged();
-        }
-        else {
+        } else {
             reminderList3.add(reminder);
             reminderAdapter3.notifyDataSetChanged();
         }
